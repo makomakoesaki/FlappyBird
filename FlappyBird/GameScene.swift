@@ -191,6 +191,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var score = 0
     var itemScore = 0
+    var bestScore = 0
     var scoreLabelNode:SKLabelNode!
     var bestScoreLabelNode:SKLabelNode!
     var itemScoreLabelNode:SKLabelNode!
@@ -368,6 +369,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             var bestScore = userDefaults.integer(forKey: "BEST")
             if score > bestScore {
                 bestScore = score
+                bestScoreLabelNode.text = "Best Score:\(bestScore)"
                 userDefaults.setValue(bestScore, forKey: "BEST")
                 userDefaults.synchronize()
             }
@@ -413,14 +415,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
         scoreLabelNode.text = "Score:\(score)"
         self.addChild(scoreLabelNode)
-        bestScoreLabelNode = SKLabelNode()
-        bestScoreLabelNode.fontColor = UIColor.black
-        bestScoreLabelNode.position = CGPoint(x: 10, y: self.frame.size.height - 120)
-        bestScoreLabelNode.zPosition = 100
-        bestScoreLabelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
-        let bestScore = userDefaults.integer(forKey: "BEST")
-        bestScoreLabelNode.text = "Best Score:\(bestScore)"
-        self.addChild(bestScoreLabelNode)
         itemScore = 0
         itemScoreLabelNode = SKLabelNode()
         itemScoreLabelNode.fontColor = UIColor.black
@@ -429,6 +423,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         itemScoreLabelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
         itemScoreLabelNode.text = "Item Score:\(itemScore)"
         self.addChild(itemScoreLabelNode)
+        bestScoreLabelNode = SKLabelNode()
+        bestScoreLabelNode.fontColor = UIColor.black
+        bestScoreLabelNode.position = CGPoint(x: 10, y: self.frame.size.height - 120)
+        bestScoreLabelNode.zPosition = 100
+        bestScoreLabelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        let bestScore = userDefaults.integer(forKey: "BEST")
+        bestScoreLabelNode.text = "Best Score:\(bestScore)"
+        self.addChild(bestScoreLabelNode)
     }
     
     func play(music: String, loop: Bool) {
